@@ -22,7 +22,7 @@ Visit the project page: [GitVulnExplorer](https://session-x.github.io/GitVulnExp
 ## 🌐 How to Use
 
 1. Visit the [GitVulnExplorer](https://session-x.github.io/GitVulnExplorer/) page.
-2. Enter a **GitHub URL** (e.g., a `.txt` file or use https://raw.githubusercontent.com/vsec7/gitdorkhelper/main/all_dorks.txt ).
+2. Enter a **GitHub URL** (e.g., a `.txt` file or copy  https://raw.githubusercontent.com/vsec7/gitdorkhelper/main/all_dorks.txt ).
 3. Alternatively, input a **target** (e.g., "paypal" or `org:paypal`).
 4. View the **keywords** and potential vulnerabilities that appear based on your search.
 
