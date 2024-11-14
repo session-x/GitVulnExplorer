@@ -5,7 +5,7 @@
 
 **GitVulnExplorer** is a web-based tool designed for ethical hackers, bug bounty hunters, and security researchers to explore potential vulnerabilities in publicly available GitHub repositories. By simply entering a GitHub URL or targeting specific repositories or organizations (e.g., "paypal" or `org:paypal`), users can easily discover exposed files, misconfigurations, and other security risks. It helps you explore GitHub repositories for sensitive information, such as `.txt` files, through a simple and intuitive interface.
 
-Visit the project page: [GitVulnExplorer](https://timetogoo.github.io/GitVulnExplorer/)
+Visit the project page: [GitVulnExplorer](https://session-x.github.io/GitVulnExplorer/)
 
 ---
 
@@ -21,7 +21,7 @@ Visit the project page: [GitVulnExplorer](https://timetogoo.github.io/GitVulnExp
 
 ## 🌐 How to Use
 
-1. Visit the [GitVulnExplorer](https://timetogoo.github.io/GitVulnExplorer/) page.
+1. Visit the [GitVulnExplorer](https://session-x.github.io/GitVulnExplorer/) page.
 2. Enter a **GitHub URL** (e.g., a `.txt` file or any repository).
 3. Alternatively, input a **target** (e.g., "paypal" or `org:paypal`).
 4. View the **keywords** and potential vulnerabilities that appear based on your search.
