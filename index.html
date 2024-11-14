@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>GitHub Dork Helper 2.0</title>
+    <title>GitVulnExplorer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
             background: linear-gradient(135deg, #ff9a9e, #fad0c4);
             color: #333;
             padding: 20px;
+            animation: fadeIn 1s;
         }
         .container {
             background: #fff;
@@ -20,20 +22,25 @@
             padding: 30px;
             max-width: 800px;
             margin: auto;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards;
         }
         h1 {
             font-weight: 500;
             color: #444;
             margin-bottom: 20px;
+            animation: pulse 1s infinite;
         }
         .btn-custom {
             background-color: #007bff;
             color: #fff;
             border: none;
-            transition: 0.3s;
+            transition: background-color 0.3s, transform 0.3s;
         }
         .btn-custom:hover {
             background-color: #0056b3;
+            transform: translateY(-3px);
         }
         textarea {
             resize: none;
@@ -47,15 +54,29 @@
             border-radius: 5px;
             padding: 10px;
             margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 1.5s forwards;
+        }
+        footer {
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="text-center"><i class="fas fa-search"></i> GitHub Dork Helper</h1>
+    <div class="container animate__animated animate__fadeInUp">
+        <h1 class="text-center animate__animated animate__pulse"><i class="fas fa-search"></i> GitVulnExplorer</h1>
         <div class="mb-3">
             <label for="url" class="form-label">From URL</label>
-            <input type="text" id="url" class="form-control" value="https://raw.githubusercontent.com/vsec7/gitdorkhelper/main/all_dorks.txt">
+            <input type="text" id="url" class="form-control" placeholder="Enter GitHub URL for a .txt file">
             <button class="btn btn-custom mt-2" onclick="getKeywords()">Get Keywords</button>
         </div>
         <div class="mb-3">
@@ -66,22 +87,34 @@
         <textarea id="keywords" class="form-control" rows="6" placeholder="Keywords will appear here..."></textarea>
         <div class="result-container" id="result"></div>
         <footer class="text-center mt-4">
-            <p>2021 | Created with ❤️ by <a href="https://twitter.com/Verry__D" target="_blank">Verry__D</a></p>
+            <p>2024 | Created with ❤️ by <a href="https://www.linkedin.com/in/alvinbijo/" target="_blank">Alvin Bijo</a></p>
         </footer>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function getKeywords() {
-            $.get($('#url').val(), function(resp) {
-                document.getElementById('keywords').value = resp;
-            });
+            const url = $('#url').val();
+            if (url) {
+                $.get(url, function(resp) {
+                    document.getElementById('keywords').value = resp;
+                }).fail(function() {
+                    alert("Failed to fetch keywords. Please check the URL and try again.");
+                });
+            } else {
+                alert("Please enter a valid URL.");
+            }
         }
         function Generate() {
             $("#result").empty();
-            $.each($('#keywords').val().split('\n'), function() {
-                var link = "https://github.com/search?q=" + $('#target').val() + " " + this + "&type=Code";
-                $('#result').append(`<p><a href="${encodeURI(link)}" target="_blank">${this}</a></p>`);
-            });
+            const target = $('#target').val();
+            if (target && $('#keywords').val()) {
+                $.each($('#keywords').val().split('\n'), function() {
+                    var link = "https://github.com/search?q=" + target + " " + this + "&type=Code";
+                    $('#result').append(`<p><a href="${encodeURI(link)}" target="_blank">${this}</a></p>`);
+                });
+            } else {
+                alert("Please enter a target and keywords.");
+            }
         }
     </script>
 </body>
